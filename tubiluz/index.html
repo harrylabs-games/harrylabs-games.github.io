@@ -46,7 +46,6 @@ img{max-width:100%;height:auto;display:block}
 .top nav a{color:var(--muted);text-decoration:none;font-size:.9rem;white-space:nowrap}
 .top nav a:hover{color:var(--cyan)}
 
-/* Language bar: own full-width row, never overlaps hero */
 .langbar{
   display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
   padding:12px 12px 4px;max-width:720px;margin:0 auto;
@@ -83,6 +82,15 @@ h2{margin:0 0 .65rem;font-size:1.2rem;color:#fff;border-left:3px solid var(--cya
 .feats .mark{flex:0 0 auto;width:1.4rem;height:1.4rem;border-radius:50%;background:rgba(92,225,230,.15);color:var(--cyan);display:grid;place-items:center;font-size:.8rem;margin-top:.15rem}
 .feats strong{color:#fff;font-weight:650}
 
+.name-box{
+  background:rgba(92,225,230,.08);border:1px solid rgba(92,225,230,.28);
+  border-radius:16px;padding:16px 16px 14px;
+}
+.name-box h2{border-left-color:var(--accent)}
+.name-box p{margin:.55rem 0;color:var(--muted)}
+.name-box p:last-child{margin-bottom:0}
+.name-box strong{color:#fff}
+
 .hint-scroll{font-size:.85rem;color:var(--muted);margin:0 0 8px}
 .shots{
   display:flex;gap:12px;overflow-x:auto;padding:4px 2px 14px;
@@ -98,7 +106,6 @@ h2{margin:0 0 .65rem;font-size:1.2rem;color:#fff;border-left:3px solid var(--cya
 }
 .shots figcaption{text-align:center;font-size:.75rem;color:var(--muted);margin-top:6px}
 
-/* 2-column grid alternative on slightly wider phones */
 @media (min-width:420px) and (max-width:719px){
   .shots{display:grid;grid-template-columns:1fr 1fr;overflow:visible;scroll-snap-type:none}
   .shots figure{width:auto}
@@ -117,7 +124,7 @@ h2{margin:0 0 .65rem;font-size:1.2rem;color:#fff;border-left:3px solid var(--cya
 .cta-box p{margin:.55rem 0}
 .reqs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;padding:0;list-style:none}
 .reqs li{background:rgba(0,0,0,.25);border:1px solid rgba(92,225,230,.25);color:var(--cyan);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600}
-.steps{margin:0;padding-left:1.2rem}.steps li{margin:.45rem 0}
+.steps{margin:0;padding-left:1.2rem}.steps li{margin:.55rem 0}
 .note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,.25);border-left:3px solid var(--accent);color:var(--muted);font-size:.95rem}
 .mail{display:inline;font-weight:700;color:var(--accent);word-break:break-all}
 
@@ -132,15 +139,40 @@ html[data-lang=pt] .l-pt,
 html[data-lang=de] .l-de{display:initial}
 
 .lightbox{
-  position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;
-  padding:16px;z-index:1000;
+  position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;
+  align-items:center;justify-content:center;flex-direction:column;gap:10px;
+  padding:56px 48px 24px;z-index:1000;touch-action:pan-y;
 }
 .lightbox.open{display:flex}
-.lightbox img{max-width:min(100%,420px);max-height:92vh;border-radius:12px}
+.lightbox .stage{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  width:100%;max-width:420px;flex:1 1 auto;min-height:0;
+}
+.lightbox img{max-width:100%;max-height:min(78vh,820px);border-radius:12px;user-select:none;-webkit-user-drag:none}
+.lightbox .lb-cap{
+  color:var(--text);font-weight:650;font-size:1rem;text-align:center;margin:0;
+  min-height:1.4em;
+}
+.lightbox .lb-count{color:var(--muted);font-size:.85rem;margin:0}
 .lightbox button.close{
   position:absolute;top:12px;right:12px;background:var(--panel);color:var(--text);border:1px solid rgba(255,255,255,.2);
-  border-radius:999px;width:40px;height:40px;font-size:1.2rem;cursor:pointer;
+  border-radius:999px;width:40px;height:40px;font-size:1.2rem;cursor:pointer;z-index:2;
 }
+.lightbox button.nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:var(--panel);color:var(--accent);border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;width:42px;height:42px;font-size:1.35rem;cursor:pointer;z-index:2;
+  display:grid;place-items:center;line-height:1;
+}
+.lightbox button.prev{left:8px}
+.lightbox button.next{right:8px}
+.lightbox button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+@media (max-width:420px){
+  .lightbox{padding:52px 8px 20px}
+  .lightbox button.prev{left:2px}
+  .lightbox button.next{right:2px}
+}
+body.lb-open{overflow:hidden}
 </style>
 </head>
 <body>
@@ -218,7 +250,7 @@ html[data-lang=de] .l-de{display:initial}
       <span class="l l-de">Was ist Tubiluz</span>
     </h2>
     <div class="l l-es">
-      <p class="lead">Es un puzzle tranquilo: toca un tubo para levantar la bola de arriba y luego otro para dejarla. Una bola solo puede ir sobre una del mismo color o en un tubo vacío. Ganas cuando cada tubo está vacío o lleno de un solo color.</p>
+      <p class="lead">Es un puzzle tranquilo: tocas un tubo para levantar la bola de arriba y luego otro para dejarla. Una bola solo puede ir sobre una del mismo color o en un tubo vacío. Ganas cuando cada tubo está vacío o lleno de un solo color.</p>
       <div class="panel"><ul class="feats">
         <li><span class="mark" aria-hidden="true">●</span><span><strong>200 niveles</strong> — de 3 a 12 colores, con tubos más altos y retos de un solo tubo vacío.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo aleatorio</strong> — tableros sin fin en Fácil, Medio y Difícil, todos con solución.</span></li>
@@ -231,12 +263,12 @@ html[data-lang=de] .l-de{display:initial}
       </ul></div>
     </div>
     <div class="l l-en">
-      <p class="lead">A calm puzzle: tap a tube to lift its top ball, then another to drop it. A ball can only go onto the same color or into an empty tube. You win when every tube is empty or filled with one color.</p>
+      <p class="lead">A calm puzzle: you tap a tube to lift its top ball, then another to drop it. A ball can only go onto the same color or into an empty tube. You win when every tube is empty or filled with one color.</p>
       <div class="panel"><ul class="feats">
         <li><span class="mark" aria-hidden="true">●</span><span><strong>200 levels</strong> — from 3 to 12 colors, taller tubes and one-empty-tube challenges.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Random mode</strong> — endless boards in Easy, Medium and Hard, all solvable.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Guided hints</strong> — highlight from/to with one move of a shortest solution.</span></li>
-        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — three guided moves the first time; replay anytime.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — three guided moves the first time; you can replay anytime.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Colorblind mode</strong> — clearer palette plus a symbol on each color.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Music &amp; sounds</strong> — made for the game; adjustable in Settings.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Languages</strong> — Español, English, Português and Deutsch.</span></li>
@@ -244,12 +276,12 @@ html[data-lang=de] .l-de{display:initial}
       </ul></div>
     </div>
     <div class="l l-pt">
-      <p class="lead">Um quebra-cabeça tranquilo: toque em um tubo para levantar a bola de cima e depois em outro para soltá-la. Uma bola só vai sobre a mesma cor ou em um tubo vazio. Você vence quando cada tubo está vazio ou cheio de uma só cor.</p>
+      <p class="lead">Um quebra-cabeça tranquilo: você toca em um tubo para levantar a bola de cima e depois em outro para soltá-la. Uma bola só vai sobre a mesma cor ou em um tubo vazio. Você vence quando cada tubo está vazio ou cheio de uma só cor.</p>
       <div class="panel"><ul class="feats">
         <li><span class="mark" aria-hidden="true">●</span><span><strong>200 níveis</strong> — de 3 a 12 cores, tubos mais altos e desafios com um só tubo vazio.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo aleatório</strong> — tabuleiros sem fim em Fácil, Médio e Difícil, todos com solução.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Dicas guiadas</strong> — destacam origem e destino com um movimento da solução mais curta.</span></li>
-        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — três movimentos guiados na primeira vez; pode repetir quando quiser.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — três movimentos guiados na primeira vez; você pode repetir quando quiser.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo daltônico</strong> — paleta mais fácil de distinguir e um símbolo por cor.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Música e sons</strong> — relaxantes, feitos para o jogo; ajustáveis em Ajustes.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Idiomas</strong> — Español, English, Português e Deutsch.</span></li>
@@ -257,17 +289,42 @@ html[data-lang=de] .l-de{display:initial}
       </ul></div>
     </div>
     <div class="l l-de">
-      <p class="lead">Ein entspanntes Puzzle: Tippe auf ein Röhrchen, um die oberste Kugel anzuheben, und dann auf ein anderes. Eine Kugel passt nur auf dieselbe Farbe oder in ein leeres Röhrchen. Du gewinnst, wenn jedes Röhrchen leer ist oder nur eine Farbe hat.</p>
+      <p class="lead">Ein entspanntes Puzzle: Du tippst auf ein Röhrchen, um die oberste Kugel anzuheben, und dann auf ein anderes. Eine Kugel passt nur auf dieselbe Farbe oder in ein leeres Röhrchen. Du gewinnst, wenn jedes Röhrchen leer ist oder nur eine Farbe hat.</p>
       <div class="panel"><ul class="feats">
         <li><span class="mark" aria-hidden="true">●</span><span><strong>200 Level</strong> — von 3 bis 12 Farben, höhere Röhrchen und Herausforderungen mit nur einem leeren Röhrchen.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Zufallsmodus</strong> — endlose Felder in Leicht, Mittel und Schwer, alle lösbar.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Geführte Tipps</strong> — markieren Von/Nach mit einem Zug der kürzesten Lösung.</span></li>
-        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — drei geführte Züge beim ersten Mal; jederzeit wiederholbar.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — drei geführte Züge beim ersten Mal; du kannst es jederzeit wiederholen.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Farbenblind-Modus</strong> — klarere Palette und ein Symbol pro Farbe.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Musik &amp; Sounds</strong> — eigens fürs Spiel; einstellbar.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Sprachen</strong> — Español, English, Português und Deutsch.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Kein Konto</strong> — der Fortschritt bleibt auf deinem Gerät.</span></li>
       </ul></div>
+    </div>
+  </section>
+
+  <section class="name-box" aria-labelledby="nombre-title" id="nombre">
+    <h2 id="nombre-title">
+      <span class="l l-es">¿Por qué se llama Tubiluz?</span>
+      <span class="l l-en">Why is it called Tubiluz?</span>
+      <span class="l l-pt">Por que se chama Tubiluz?</span>
+      <span class="l l-de">Warum heißt es Tubiluz?</span>
+    </h2>
+    <div class="l l-es">
+      <p>El nombre <strong>Tubiluz</strong> junta las palabras españolas <em>tubo</em> y <em>luz</em>: tubos de color que brillan.</p>
+      <p>Quise un nombre corto, fácil de recordar y que evocara el juego de un vistazo.</p>
+    </div>
+    <div class="l l-en">
+      <p>The name <strong>Tubiluz</strong> blends the Spanish words <em>tubo</em> (tube) and <em>luz</em> (light): tubes of glowing color.</p>
+      <p>I wanted a short name that’s easy to remember and hints at the game at a glance.</p>
+    </div>
+    <div class="l l-pt">
+      <p>O nome <strong>Tubiluz</strong> junta as palavras espanholas <em>tubo</em> e <em>luz</em> (luz): tubos de cor que brilham.</p>
+      <p>Eu quis um nome curto, fácil de lembrar e que evocasse o jogo de um só olhar.</p>
+    </div>
+    <div class="l l-de">
+      <p>Der Name <strong>Tubiluz</strong> verbindet die spanischen Wörter <em>tubo</em> (Röhrchen) und <em>luz</em> (Licht): leuchtende Farbröhrchen.</p>
+      <p>Ich wollte einen kurzen Namen, der leicht zu merken ist und das Spiel auf einen Blick andeutet.</p>
     </div>
   </section>
 
@@ -287,61 +344,61 @@ html[data-lang=de] .l-de{display:initial}
         </ul>
         <p><strong>Cómo unirte</strong></p>
         <ol class="steps">
-          <li>Envíale tu correo de Gmail a Harenson (también puedes escribir a <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
-          <li>Recibirás un enlace de invitación: ábrelo y acéptalo.</li>
+          <li>Envíame tu correo de Gmail (también puedes escribirme a <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>Te enviaré un enlace de invitación: ábrelo y acéptalo.</li>
           <li>Instala Tubiluz desde Play Store con esa misma cuenta.</li>
-          <li>Quédate en la prueba al menos <strong>14 días seguidos</strong> sin salirte.</li>
+          <li>Quédate en la prueba al menos <strong>14 días seguidos</strong> sin salirte (es decir, sin abandonar la prueba ni desinstalar el juego; no hace falta tenerlo abierto).</li>
         </ol>
-        <p>Jugar un ratito de vez en cuando y contarme si algo falla ayuda muchísimo.</p>
+        <p>Jugar un ratito de vez en cuando y contarme si algo falla me ayuda muchísimo.</p>
         <p class="note">Tubiluz es gratis y muestra anuncios: así se financia el proyecto. Durante la prueba puedes darme tu opinión con total confianza.</p>
       </div>
 
       <div class="l l-en">
-        <p>I’m looking for trusted people for the <strong>closed test</strong> of Tubiluz on Android. It’s free and helps a lot to find bugs before launch.</p>
+        <p>I’m looking for trusted people for the <strong>closed test</strong> of Tubiluz on Android. It’s free and helps me a lot to find bugs before launch.</p>
         <ul class="reqs" aria-label="Requirements">
           <li>Free</li><li>Android only</li><li>Gmail / Google account</li><li>Android phone</li>
         </ul>
         <p><strong>How to join</strong></p>
         <ol class="steps">
-          <li>Send your Gmail address to Harenson (or email <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
-          <li>You’ll get an invite link — open it and accept.</li>
+          <li>Send me your Gmail address (you can also email me at <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>I’ll send you an invite link — open it and accept.</li>
           <li>Install Tubiluz from the Play Store with that same account.</li>
-          <li>Stay in the test for at least <strong>14 consecutive days</strong> without leaving.</li>
+          <li>Stay in the test for at least <strong>14 consecutive days</strong> without leaving (that means not leaving the test program and not uninstalling the game; you don’t need to keep it open).</li>
         </ol>
-        <p>Playing a little now and then and reporting bugs helps a lot.</p>
-        <p class="note">Tubiluz is free and shows ads — that’s how the project is funded. During the test you can share feedback freely.</p>
+        <p>Playing a little now and then and telling me if something breaks helps me a lot.</p>
+        <p class="note">Tubiluz is free and shows ads — that’s how the project is funded. During the test you can share feedback with me freely.</p>
       </div>
 
       <div class="l l-pt">
-        <p>Procuro pessoas de confiança para o <strong>teste fechado</strong> do Tubiluz no Android. É grátis e me ajuda muito a achar falhas antes do lançamento.</p>
+        <p>Estou procurando pessoas de confiança para o <strong>teste fechado</strong> do Tubiluz no Android. É grátis e me ajuda muito a achar falhas antes do lançamento.</p>
         <ul class="reqs" aria-label="Requisitos">
           <li>Grátis</li><li>Só Android</li><li>Conta Gmail / Google</li><li>Celular Android</li>
         </ul>
         <p><strong>Como participar</strong></p>
         <ol class="steps">
-          <li>Envie seu e-mail do Gmail para Harenson (ou escreva para <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
-          <li>Você receberá um link de convite: abra e aceite.</li>
+          <li>Envie-me o seu e-mail do Gmail (também pode escrever para mim em <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>Eu te envio um link de convite: abra e aceite.</li>
           <li>Instale o Tubiluz pela Play Store com essa mesma conta.</li>
-          <li>Fique no teste por pelo menos <strong>14 dias seguidos</strong> sem sair.</li>
+          <li>Fique no teste por pelo menos <strong>14 dias seguidos</strong> sem sair (ou seja, sem abandonar o teste nem desinstalar o jogo; não precisa deixá-lo aberto).</li>
         </ol>
-        <p>Jogar um pouco de vez em quando e avisar se algo falhar ajuda muito.</p>
-        <p class="note">Tubiluz é grátis e mostra anúncios: é assim que o projeto se financia. Durante o teste você pode dar feedback com confiança.</p>
+        <p>Jogar um pouco de vez em quando e me avisar se algo falhar me ajuda muito.</p>
+        <p class="note">Tubiluz é grátis e mostra anúncios: é assim que o projeto se financia. Durante o teste você pode me dar feedback com confiança.</p>
       </div>
 
       <div class="l l-de">
-        <p>Ich suche vertrauenswürdige Leute für den <strong>geschlossenen Test</strong> von Tubiluz auf Android. Er ist kostenlos und hilft sehr, Fehler vor dem Start zu finden.</p>
+        <p>Ich suche vertrauenswürdige Leute für den <strong>geschlossenen Test</strong> von Tubiluz auf Android. Er ist kostenlos und hilft mir sehr, Fehler vor dem Start zu finden.</p>
         <ul class="reqs" aria-label="Voraussetzungen">
           <li>Kostenlos</li><li>Nur Android</li><li>Gmail-/Google-Konto</li><li>Android-Handy</li>
         </ul>
         <p><strong>So machst du mit</strong></p>
         <ol class="steps">
-          <li>Schick deine Gmail-Adresse an Harenson (oder schreib an <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
-          <li>Du bekommst einen Einladungslink — öffne ihn und nimm an.</li>
+          <li>Schick mir deine Gmail-Adresse (du kannst mir auch an <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a> schreiben).</li>
+          <li>Ich schicke dir einen Einladungslink — öffne ihn und nimm an.</li>
           <li>Installiere Tubiluz über den Play Store mit demselben Konto.</li>
-          <li>Bleib mindestens <strong>14 Tage am Stück</strong> im Test, ohne ihn zu verlassen.</li>
+          <li>Bleib mindestens <strong>14 Tage am Stück</strong> im Test, ohne ihn zu verlassen (also ohne den Test zu verlassen und ohne das Spiel zu deinstallieren; du musst es nicht geöffnet lassen).</li>
         </ol>
-        <p>Ab und zu ein bisschen spielen und Bugs melden hilft enorm.</p>
-        <p class="note">Tubiluz ist kostenlos und zeigt Werbung — so wird das Projekt finanziert. Im Test kannst du Feedback geben.</p>
+        <p>Ab und zu ein bisschen spielen und mir Bugs melden hilft mir enorm.</p>
+        <p class="note">Tubiluz ist kostenlos und zeigt Werbung — so wird das Projekt finanziert. Im Test kannst du mir Feedback geben.</p>
       </div>
     </div>
   </section>
@@ -361,9 +418,15 @@ html[data-lang=de] .l-de{display:initial}
   </p>
 </footer>
 
-<div class="lightbox" id="lightbox" hidden>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close">×</button>
-  <img src="" alt="">
+  <button type="button" class="nav prev" aria-label="Previous">‹</button>
+  <button type="button" class="nav next" aria-label="Next">›</button>
+  <div class="stage">
+    <img src="" alt="">
+  </div>
+  <p class="lb-cap" id="lb-cap"></p>
+  <p class="lb-count" id="lb-count"></p>
 </div>
 
 <script>
@@ -383,14 +446,23 @@ html[data-lang=de] .l-de{display:initial}
   var box=document.getElementById('shots');
   var lb=document.getElementById('lightbox');
   var lbImg=lb.querySelector('img');
+  var lbCap=document.getElementById('lb-cap');
+  var lbCount=document.getElementById('lb-count');
+  var lang='es';
+  var lbIndex=0;
+  var lbOpen=false;
+  var touchX=null;
 
-  function renderShots(lang){
+  function capAt(i){var s=shots[i]; return s[lang]||s.es}
+  function srcAt(i){return 'img/shots/'+lang+'/'+shots[i].id+'.jpg'}
+
+  function renderShots(){
     var html='';
     for(var i=0;i<shots.length;i++){
       var s=shots[i];
       var base='img/shots/'+lang+'/'+s.id;
-      var cap=s[lang]||s.es;
-      html+='<figure role="listitem"><button type="button" data-full="'+base+'.jpg" aria-label="'+cap+'">'
+      var cap=capAt(i);
+      html+='<figure role="listitem"><button type="button" data-index="'+i+'" aria-label="'+cap+'">'
         +'<picture><source srcset="'+base+'.webp" type="image/webp">'
         +'<img src="'+base+'.jpg" width="540" height="960" loading="'+(i<2?'eager':'lazy')+'" alt="'+cap+'"></picture>'
         +'</button><figcaption>'+cap+'</figcaption></figure>';
@@ -398,14 +470,33 @@ html[data-lang=de] .l-de{display:initial}
     box.innerHTML=html;
   }
 
+  function showLb(i){
+    lbIndex=((i%shots.length)+shots.length)%shots.length;
+    var cap=capAt(lbIndex);
+    lbImg.src=srcAt(lbIndex);
+    lbImg.alt=cap;
+    lbCap.textContent=cap;
+    lbCount.textContent=(lbIndex+1)+' / '+shots.length;
+    lb.hidden=false; lb.classList.add('open'); lbOpen=true;
+    document.body.classList.add('lb-open');
+  }
+  function closeLb(){
+    lb.classList.remove('open'); lb.hidden=true; lbOpen=false;
+    lbImg.removeAttribute('src'); lbCap.textContent=''; lbCount.textContent='';
+    document.body.classList.remove('lb-open');
+  }
+  function stepLb(d){ if(lbOpen) showLb(lbIndex+d) }
+
   function setLang(l){
     if(ok.indexOf(l)<0)l='es';
+    lang=l;
     document.documentElement.setAttribute('data-lang',l);
     document.documentElement.setAttribute('lang',htmlLang[l]||'es-419');
     document.querySelectorAll('.langbar button').forEach(function(b){
       var on=b.dataset.l===l; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on?'true':'false');
     });
-    renderShots(l);
+    renderShots();
+    if(lbOpen) showLb(lbIndex);
     try{localStorage.setItem('tubiluz-lang',l)}catch(e){}
   }
 
@@ -427,16 +518,29 @@ html[data-lang=de] .l-de{display:initial}
   });
 
   box.addEventListener('click',function(e){
-    var btn=e.target.closest('button[data-full]');
+    var btn=e.target.closest('button[data-index]');
     if(!btn)return;
-    lbImg.src=btn.getAttribute('data-full');
-    lbImg.alt=btn.getAttribute('aria-label')||'';
-    lb.hidden=false; lb.classList.add('open');
+    showLb(parseInt(btn.getAttribute('data-index'),10));
   });
-  function closeLb(){lb.classList.remove('open');lb.hidden=true;lbImg.removeAttribute('src')}
   lb.querySelector('.close').addEventListener('click',closeLb);
+  lb.querySelector('.prev').addEventListener('click',function(e){e.stopPropagation(); stepLb(-1)});
+  lb.querySelector('.next').addEventListener('click',function(e){e.stopPropagation(); stepLb(1)});
   lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
+  document.addEventListener('keydown',function(e){
+    if(!lbOpen)return;
+    if(e.key==='Escape')closeLb();
+    else if(e.key==='ArrowLeft')stepLb(-1);
+    else if(e.key==='ArrowRight')stepLb(1);
+  });
+  lb.addEventListener('touchstart',function(e){
+    if(e.changedTouches&&e.changedTouches[0]) touchX=e.changedTouches[0].clientX;
+  },{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(touchX==null||!e.changedTouches||!e.changedTouches[0]) return;
+    var dx=e.changedTouches[0].clientX-touchX; touchX=null;
+    if(Math.abs(dx)<40) return;
+    stepLb(dx<0?1:-1);
+  },{passive:true});
 })();
 </script>
 </body>
