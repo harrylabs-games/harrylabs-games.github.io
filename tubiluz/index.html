@@ -8,8 +8,6 @@
 <meta name="theme-color" content="#0b0d1c">
 <link rel="icon" href="img/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="img/icon-192.png">
-
-<!-- Open Graph / WhatsApp -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_LA">
 <meta property="og:url" content="https://harrylabs-games.github.io/tubiluz/">
@@ -20,146 +18,128 @@
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="500">
 <meta property="og:site_name" content="HarryLabs Games">
-
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tubiluz: Ordena los Colores — ayuda a probarlo">
 <meta name="twitter:description" content="Puzzle tranquilo de ordenar colores para Android. 200 niveles, modo aleatorio y pistas. Únete a la prueba cerrada.">
 <meta name="twitter:image" content="https://harrylabs-games.github.io/tubiluz/img/feature-graphic.jpg">
-
 <style>
 :root{
-  --bg:#0b0d1c;
-  --bg2:#151a3a;
-  --panel:#1b2048;
-  --accent:#ffb627;
-  --cyan:#5ce1e6;
-  --text:#eef0ff;
-  --muted:#a8aed6;
-  --ok:#7dffa0;
+  --bg:#0b0d1c;--bg2:#151a3a;--panel:#1b2048;--accent:#ffb627;--cyan:#5ce1e6;
+  --text:#eef0ff;--muted:#a8aed6;
 }
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
 body{
-  margin:0;
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  color:var(--text);
-  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 40%) fixed;
-  line-height:1.55;
-  -webkit-text-size-adjust:100%;
+  margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--text);background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 42%) fixed;
+  line-height:1.55;-webkit-text-size-adjust:100%;
 }
-a{color:var(--accent)}
-a:hover{color:#ffcb5c}
+a{color:var(--accent)}a:hover{color:#ffcb5c}
 img{max-width:100%;height:auto;display:block}
-.wrap{max-width:720px;margin:0 auto;padding:0 18px 48px}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 48px}
 .top{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 18px;background:rgba(0,0,0,.28);border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:12px 16px;background:rgba(0,0,0,.28);border-bottom:1px solid rgba(255,255,255,.06);
 }
-.brand{display:flex;gap:10px;align-items:center;color:var(--text);text-decoration:none;font-weight:700;font-size:.95rem}
-.brand img{border-radius:8px;width:32px;height:32px}
-.top nav a{color:var(--muted);text-decoration:none;font-size:.9rem}
+.brand{display:flex;gap:10px;align-items:center;color:var(--text);text-decoration:none;font-weight:700;font-size:.95rem;min-width:0}
+.brand img{border-radius:8px;width:32px;height:32px;flex:0 0 auto}
+.top nav a{color:var(--muted);text-decoration:none;font-size:.9rem;white-space:nowrap}
 .top nav a:hover{color:var(--cyan)}
 
-.hero{
-  text-align:center;padding:28px 0 8px;
+/* Language bar: own full-width row, never overlaps hero */
+.langbar{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  padding:12px 12px 4px;max-width:720px;margin:0 auto;
 }
+.langbar button{
+  background:var(--panel);color:var(--text);border:1px solid rgba(255,255,255,.15);
+  border-radius:999px;padding:7px 12px;cursor:pointer;font:inherit;font-size:.85rem;line-height:1.2;
+}
+.langbar button.on{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 1px rgba(255,182,39,.35)}
+.langbar button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+.hero{text-align:center;padding:18px 0 6px}
 .hero-icon{
-  width:112px;height:112px;border-radius:26px;margin:0 auto 14px;
+  width:104px;height:104px;border-radius:24px;margin:0 auto 12px;
   box-shadow:0 12px 32px rgba(0,0,0,.45),0 0 0 2px rgba(92,225,230,.25);
 }
-.hero h1{
-  margin:0 0 8px;color:var(--accent);font-size:clamp(1.45rem,5.5vw,2rem);line-height:1.2;
+.hero h1{margin:0 0 8px;color:var(--accent);font-size:clamp(1.35rem,5.2vw,1.95rem);line-height:1.2}
+.pitch{margin:0 auto 14px;max-width:34em;color:var(--text);font-size:1.05rem;font-weight:500}
+.cta{
+  display:inline-block;background:var(--accent);color:#111;font-weight:800;text-decoration:none;
+  padding:12px 22px;border-radius:999px;font-size:1rem;border:0;cursor:pointer;
+  box-shadow:0 8px 22px rgba(255,182,39,.28);
 }
-.pitch{
-  margin:0 auto 18px;max-width:34em;color:var(--text);font-size:1.08rem;font-weight:500;
-}
-.feature{
-  border-radius:16px;overflow:hidden;margin:0 auto 8px;
-  box-shadow:0 10px 28px rgba(0,0,0,.4);
-  border:1px solid rgba(92,225,230,.18);
-}
+.cta:hover{color:#111;filter:brightness(1.05)}
+.feature{border-radius:16px;overflow:hidden;margin:16px auto 0;box-shadow:0 10px 28px rgba(0,0,0,.4);border:1px solid rgba(92,225,230,.18)}
 .feature img{width:100%}
 
-section{margin-top:2.1rem}
-h2{
-  margin:0 0 .7rem;font-size:1.25rem;color:#fff;
-  border-left:3px solid var(--cyan);padding-left:10px;
-}
-h2 .emoji{margin-right:.25rem}
+section{margin-top:1.7rem}
+h2{margin:0 0 .65rem;font-size:1.2rem;color:#fff;border-left:3px solid var(--cyan);padding-left:10px}
 .lead{color:var(--muted);margin:0 0 1rem}
-.panel{
-  background:var(--panel);border-radius:16px;padding:16px 16px 14px;
-  border:1px solid rgba(255,255,255,.06);
-}
+.panel{background:var(--panel);border-radius:16px;padding:14px;border:1px solid rgba(255,255,255,.06)}
 .feats{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.feats li{
-  display:flex;gap:10px;align-items:flex-start;
-  background:rgba(0,0,0,.18);border-radius:12px;padding:10px 12px;
-}
-.feats .mark{
-  flex:0 0 auto;width:1.5rem;height:1.5rem;border-radius:50%;
-  background:rgba(92,225,230,.15);color:var(--cyan);
-  display:grid;place-items:center;font-size:.85rem;margin-top:.1rem;
-}
+.feats li{display:flex;gap:10px;align-items:flex-start;background:rgba(0,0,0,.18);border-radius:12px;padding:10px 12px}
+.feats .mark{flex:0 0 auto;width:1.4rem;height:1.4rem;border-radius:50%;background:rgba(92,225,230,.15);color:var(--cyan);display:grid;place-items:center;font-size:.8rem;margin-top:.15rem}
 .feats strong{color:#fff;font-weight:650}
 
-.shots-wrap{margin-top:.4rem}
+.hint-scroll{font-size:.85rem;color:var(--muted);margin:0 0 8px}
 .shots{
-  display:flex;gap:12px;overflow-x:auto;padding:6px 2px 14px;
+  display:flex;gap:12px;overflow-x:auto;padding:4px 2px 14px;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
 }
-.shots figure{
-  margin:0;flex:0 0 auto;width:min(42vw,180px);scroll-snap-align:start;
+.shots figure{margin:0;flex:0 0 auto;width:min(46vw,190px);scroll-snap-align:start}
+.shots button{
+  display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in;border-radius:14px;
 }
 .shots img{
-  width:100%;border-radius:14px;
-  box-shadow:0 8px 20px rgba(0,0,0,.35);
+  width:100%;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.08);
 }
-.shots figcaption{
-  text-align:center;font-size:.75rem;color:var(--muted);margin-top:6px;
+.shots figcaption{text-align:center;font-size:.75rem;color:var(--muted);margin-top:6px}
+
+/* 2-column grid alternative on slightly wider phones */
+@media (min-width:420px) and (max-width:719px){
+  .shots{display:grid;grid-template-columns:1fr 1fr;overflow:visible;scroll-snap-type:none}
+  .shots figure{width:auto}
 }
-.hint-scroll{font-size:.8rem;color:var(--muted);margin:0 0 6px}
+@media (min-width:720px){
+  .shots{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible}
+  .shots figure{width:auto}
+  .feats{grid-template-columns:1fr 1fr}
+}
 
 .cta-box{
   background:linear-gradient(160deg,rgba(255,182,39,.12),rgba(92,225,230,.08));
-  border:1px solid rgba(255,182,39,.35);
-  border-radius:18px;padding:18px 16px 16px;
+  border:1px solid rgba(255,182,39,.35);border-radius:18px;padding:18px 16px 16px;
 }
 .cta-box h2{border-left-color:var(--accent)}
 .cta-box p{margin:.55rem 0}
-.reqs{
-  display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;padding:0;list-style:none;
-}
-.reqs li{
-  background:rgba(0,0,0,.25);border:1px solid rgba(92,225,230,.25);
-  color:var(--cyan);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600;
-}
-.steps{margin:0;padding-left:1.2rem}
-.steps li{margin:.45rem 0}
-.note{
-  margin-top:14px;padding:12px 14px;border-radius:12px;
-  background:rgba(0,0,0,.25);border-left:3px solid var(--accent);
-  color:var(--muted);font-size:.95rem;
-}
-.mail{
-  display:inline-block;margin-top:4px;font-weight:700;color:var(--accent);
-  word-break:break-all;
-}
+.reqs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;padding:0;list-style:none}
+.reqs li{background:rgba(0,0,0,.25);border:1px solid rgba(92,225,230,.25);color:var(--cyan);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600}
+.steps{margin:0;padding-left:1.2rem}.steps li{margin:.45rem 0}
+.note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,.25);border-left:3px solid var(--accent);color:var(--muted);font-size:.95rem}
+.mail{display:inline;font-weight:700;color:var(--accent);word-break:break-all}
 
-footer{
-  text-align:center;color:var(--muted);font-size:.85rem;
-  padding:22px 16px 28px;border-top:1px solid rgba(255,255,255,.08);margin-top:2.5rem;
-}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:22px 16px 28px;border-top:1px solid rgba(255,255,255,.08);margin-top:2.5rem}
 footer p{margin:.35rem 0}
-footer a{color:var(--muted)}
-footer a:hover{color:var(--accent)}
+footer a{color:var(--muted)}footer a:hover{color:var(--accent)}
 
-@media (min-width:640px){
-  .feats{grid-template-columns:1fr 1fr}
-  .shots figure{width:160px}
-  .cta-box,.panel{padding:20px}
+html[data-lang] .l{display:none}
+html[data-lang=es] .l-es,
+html[data-lang=en] .l-en,
+html[data-lang=pt] .l-pt,
+html[data-lang=de] .l-de{display:initial}
+
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;
+  padding:16px;z-index:1000;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(100%,420px);max-height:92vh;border-radius:12px}
+.lightbox button.close{
+  position:absolute;top:12px;right:12px;background:var(--panel);color:var(--text);border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;width:40px;height:40px;font-size:1.2rem;cursor:pointer;
 }
 </style>
 </head>
@@ -169,28 +149,77 @@ footer a:hover{color:var(--accent)}
     <img src="img/icon-192.png" width="32" height="32" alt="">
     HarryLabs Games
   </a>
-  <nav><a href="privacy/">Privacidad</a></nav>
+  <nav>
+    <a href="privacy/">
+      <span class="l l-es">Privacidad</span>
+      <span class="l l-en">Privacy</span>
+      <span class="l l-pt">Privacidade</span>
+      <span class="l l-de">Datenschutz</span>
+    </a>
+  </nav>
 </header>
 
+<div class="langbar" role="group" aria-label="Language">
+  <button type="button" data-l="es" aria-pressed="true">Español</button>
+  <button type="button" data-l="en" aria-pressed="false">English</button>
+  <button type="button" data-l="pt" aria-pressed="false">Português</button>
+  <button type="button" data-l="de" aria-pressed="false">Deutsch</button>
+</div>
+
 <main class="wrap">
-  <section class="hero" aria-label="Presentación">
+  <section class="hero" aria-label="Hero">
     <picture>
       <source srcset="img/icon-192.webp" type="image/webp">
-      <img class="hero-icon" src="img/icon-192.png" width="192" height="192" alt="Icono de Tubiluz">
+      <img class="hero-icon" src="img/icon-192.png" width="192" height="192" alt="Tubiluz">
     </picture>
-    <h1>Tubiluz: Ordena los Colores</h1>
-    <p class="pitch">Ordena bolas de colores en tubos: 200 niveles, modo aleatorio y pistas guiadas.</p>
+    <h1>
+      <span class="l l-es">Tubiluz: Ordena los Colores</span>
+      <span class="l l-en">Tubiluz: Color Sort Puzzle</span>
+      <span class="l l-pt">Tubiluz: Organize as Cores</span>
+      <span class="l l-de">Tubiluz: Farben sortieren</span>
+    </h1>
+    <p class="pitch">
+      <span class="l l-es">Ordena bolas de colores en tubos: 200 niveles, modo aleatorio y pistas guiadas.</span>
+      <span class="l l-en">Sort colored balls into tubes. 200 levels, random mode and step-by-step hints.</span>
+      <span class="l l-pt">Organize bolas coloridas em tubos: 200 níveis, modo aleatório e dicas guiadas.</span>
+      <span class="l l-de">Sortiere bunte Kugeln in Röhrchen: 200 Level, Zufallsmodus und hilfreiche Tipps.</span>
+    </p>
+    <a class="cta" href="#probar">
+      <span class="l l-es">Quiero ser tester</span>
+      <span class="l l-en">I want to be a tester</span>
+      <span class="l l-pt">Quero ser tester</span>
+      <span class="l l-de">Ich will Tester sein</span>
+    </a>
     <picture class="feature">
       <source srcset="img/feature-graphic.webp" type="image/webp">
-      <img src="img/feature-graphic.jpg" width="1024" height="500" alt="Tubiluz — gráfica del juego">
+      <img src="img/feature-graphic.jpg" width="1024" height="500" alt="Tubiluz">
     </picture>
   </section>
 
+  <section aria-labelledby="capturas" id="capturas">
+    <h2 id="capturas">
+      <span class="l l-es">Así se ve</span>
+      <span class="l l-en">How it looks</span>
+      <span class="l l-pt">Como fica</span>
+      <span class="l l-de">So sieht’s aus</span>
+    </h2>
+    <p class="hint-scroll l l-es">Desliza o toca una captura para ampliar →</p>
+    <p class="hint-scroll l l-en">Swipe or tap a screenshot to enlarge →</p>
+    <p class="hint-scroll l l-pt">Deslize ou toque para ampliar →</p>
+    <p class="hint-scroll l l-de">Wischen oder tippen zum Vergrößern →</p>
+    <div class="shots" id="shots" role="list"></div>
+  </section>
+
   <section aria-labelledby="que-es">
-    <h2 id="que-es">Qué es Tubiluz</h2>
-    <p class="lead">Es un puzzle tranquilo: toca un tubo para levantar la bola de arriba y luego otro para dejarla. Una bola solo puede ir sobre una del mismo color o en un tubo vacío. Ganas cuando cada tubo está vacío o lleno de un solo color.</p>
-    <div class="panel">
-      <ul class="feats">
+    <h2 id="que-es">
+      <span class="l l-es">Qué es Tubiluz</span>
+      <span class="l l-en">What is Tubiluz</span>
+      <span class="l l-pt">O que é Tubiluz</span>
+      <span class="l l-de">Was ist Tubiluz</span>
+    </h2>
+    <div class="l l-es">
+      <p class="lead">Es un puzzle tranquilo: toca un tubo para levantar la bola de arriba y luego otro para dejarla. Una bola solo puede ir sobre una del mismo color o en un tubo vacío. Ganas cuando cada tubo está vacío o lleno de un solo color.</p>
+      <div class="panel"><ul class="feats">
         <li><span class="mark" aria-hidden="true">●</span><span><strong>200 niveles</strong> — de 3 a 12 colores, con tubos más altos y retos de un solo tubo vacío.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo aleatorio</strong> — tableros sin fin en Fácil, Medio y Difícil, todos con solución.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Pistas guiadas</strong> — iluminan origen y destino con un movimiento de la solución más corta.</span></li>
@@ -198,95 +227,122 @@ footer a:hover{color:var(--accent)}
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo daltónico</strong> — paleta más fácil de distinguir y un símbolo por color.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Música y sonidos</strong> — relajantes, hechos para el juego; ajustables en Ajustes.</span></li>
         <li><span class="mark" aria-hidden="true">●</span><span><strong>Idiomas</strong> — Español, English, Português y Deutsch.</span></li>
-        <li><span class="mark" aria-hidden="true">●</span><span><strong>Sin cuentas</strong> — el progreso y los ajustes se guardan en tu dispositivo.</span></li>
-      </ul>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Sin cuentas</strong> — el progreso se guarda en tu dispositivo.</span></li>
+      </ul></div>
     </div>
-  </section>
-
-  <section aria-labelledby="capturas">
-    <h2 id="capturas">Así se ve</h2>
-    <p class="hint-scroll">Desliza para ver las capturas →</p>
-    <div class="shots-wrap">
-      <div class="shots" role="list">
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/01_hint.webp" type="image/webp">
-            <img src="img/shots/01_hint.jpg" width="540" height="960" loading="lazy" alt="Pista guiada en un nivel">
-          </picture>
-          <figcaption>Pistas</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/02_menu.webp" type="image/webp">
-            <img src="img/shots/02_menu.jpg" width="540" height="960" loading="lazy" alt="Menú principal">
-          </picture>
-          <figcaption>Menú</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/03_level150.webp" type="image/webp">
-            <img src="img/shots/03_level150.jpg" width="540" height="960" loading="lazy" alt="Nivel avanzado">
-          </picture>
-          <figcaption>Niveles</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/04_colorblind.webp" type="image/webp">
-            <img src="img/shots/04_colorblind.jpg" width="540" height="960" loading="lazy" alt="Modo daltónico con símbolos">
-          </picture>
-          <figcaption>Daltónico</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/05_tutorial.webp" type="image/webp">
-            <img src="img/shots/05_tutorial.jpg" width="540" height="960" loading="lazy" alt="Tutorial interactivo">
-          </picture>
-          <figcaption>Tutorial</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/06_random_hard.webp" type="image/webp">
-            <img src="img/shots/06_random_hard.jpg" width="540" height="960" loading="lazy" alt="Modo aleatorio difícil">
-          </picture>
-          <figcaption>Aleatorio</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/07_levels.webp" type="image/webp">
-            <img src="img/shots/07_levels.jpg" width="540" height="960" loading="lazy" alt="Selector de niveles">
-          </picture>
-          <figcaption>Selector</figcaption>
-        </figure>
-        <figure role="listitem">
-          <picture>
-            <source srcset="img/shots/08_settings.webp" type="image/webp">
-            <img src="img/shots/08_settings.jpg" width="540" height="960" loading="lazy" alt="Pantalla de ajustes">
-          </picture>
-          <figcaption>Ajustes</figcaption>
-        </figure>
-      </div>
+    <div class="l l-en">
+      <p class="lead">A calm puzzle: tap a tube to lift its top ball, then another to drop it. A ball can only go onto the same color or into an empty tube. You win when every tube is empty or filled with one color.</p>
+      <div class="panel"><ul class="feats">
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>200 levels</strong> — from 3 to 12 colors, taller tubes and one-empty-tube challenges.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Random mode</strong> — endless boards in Easy, Medium and Hard, all solvable.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Guided hints</strong> — highlight from/to with one move of a shortest solution.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — three guided moves the first time; replay anytime.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Colorblind mode</strong> — clearer palette plus a symbol on each color.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Music &amp; sounds</strong> — made for the game; adjustable in Settings.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Languages</strong> — Español, English, Português and Deutsch.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>No account</strong> — progress stays on your device.</span></li>
+      </ul></div>
+    </div>
+    <div class="l l-pt">
+      <p class="lead">Um quebra-cabeça tranquilo: toque em um tubo para levantar a bola de cima e depois em outro para soltá-la. Uma bola só vai sobre a mesma cor ou em um tubo vazio. Você vence quando cada tubo está vazio ou cheio de uma só cor.</p>
+      <div class="panel"><ul class="feats">
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>200 níveis</strong> — de 3 a 12 cores, tubos mais altos e desafios com um só tubo vazio.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo aleatório</strong> — tabuleiros sem fim em Fácil, Médio e Difícil, todos com solução.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Dicas guiadas</strong> — destacam origem e destino com um movimento da solução mais curta.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — três movimentos guiados na primeira vez; pode repetir quando quiser.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo daltônico</strong> — paleta mais fácil de distinguir e um símbolo por cor.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Música e sons</strong> — relaxantes, feitos para o jogo; ajustáveis em Ajustes.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Idiomas</strong> — Español, English, Português e Deutsch.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Sem conta</strong> — o progresso fica no seu dispositivo.</span></li>
+      </ul></div>
+    </div>
+    <div class="l l-de">
+      <p class="lead">Ein entspanntes Puzzle: Tippe auf ein Röhrchen, um die oberste Kugel anzuheben, und dann auf ein anderes. Eine Kugel passt nur auf dieselbe Farbe oder in ein leeres Röhrchen. Du gewinnst, wenn jedes Röhrchen leer ist oder nur eine Farbe hat.</p>
+      <div class="panel"><ul class="feats">
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>200 Level</strong> — von 3 bis 12 Farben, höhere Röhrchen und Herausforderungen mit nur einem leeren Röhrchen.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Zufallsmodus</strong> — endlose Felder in Leicht, Mittel und Schwer, alle lösbar.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Geführte Tipps</strong> — markieren Von/Nach mit einem Zug der kürzesten Lösung.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — drei geführte Züge beim ersten Mal; jederzeit wiederholbar.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Farbenblind-Modus</strong> — klarere Palette und ein Symbol pro Farbe.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Musik &amp; Sounds</strong> — eigens fürs Spiel; einstellbar.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Sprachen</strong> — Español, English, Português und Deutsch.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Kein Konto</strong> — der Fortschritt bleibt auf deinem Gerät.</span></li>
+      </ul></div>
     </div>
   </section>
 
   <section aria-labelledby="probar-title" id="probar">
     <div class="cta-box">
-      <h2 id="probar-title">Ayúdame a probarlo</h2>
-      <p>Estoy buscando personas de confianza para la <strong>prueba cerrada</strong> de Tubiluz en Android. Es gratis y me ayuda mucho a encontrar fallos antes del lanzamiento.</p>
-      <ul class="reqs" aria-label="Requisitos">
-        <li>Gratis</li>
-        <li>Solo Android</li>
-        <li>Cuenta de Gmail / Google</li>
-        <li>Teléfono Android</li>
-      </ul>
-      <p><strong>Cómo unirte</strong></p>
-      <ol class="steps">
-        <li>Envíale tu correo de Gmail a Harenson (también puedes escribir a <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
-        <li>Recibirás un enlace de invitación: ábrelo y acéptalo.</li>
-        <li>Instala Tubiluz desde Play Store con esa misma cuenta.</li>
-        <li>Quédate en la prueba al menos <strong>14 días seguidos</strong> sin salirte.</li>
-      </ol>
-      <p>Jugar un ratito de vez en cuando y contarme si algo falla ayuda muchísimo.</p>
-      <p class="note">Tubiluz es gratis y muestra anuncios: así se financia el proyecto. Durante la prueba puedes darme tu opinión con total confianza.</p>
+      <h2 id="probar-title">
+        <span class="l l-es">Ayúdame a probarlo</span>
+        <span class="l l-en">Help me test it</span>
+        <span class="l l-pt">Ajude-me a testar</span>
+        <span class="l l-de">Hilf mir beim Testen</span>
+      </h2>
+
+      <div class="l l-es">
+        <p>Estoy buscando personas de confianza para la <strong>prueba cerrada</strong> de Tubiluz en Android. Es gratis y me ayuda mucho a encontrar fallos antes del lanzamiento.</p>
+        <ul class="reqs" aria-label="Requisitos">
+          <li>Gratis</li><li>Solo Android</li><li>Cuenta de Gmail / Google</li><li>Teléfono Android</li>
+        </ul>
+        <p><strong>Cómo unirte</strong></p>
+        <ol class="steps">
+          <li>Envíale tu correo de Gmail a Harenson (también puedes escribir a <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>Recibirás un enlace de invitación: ábrelo y acéptalo.</li>
+          <li>Instala Tubiluz desde Play Store con esa misma cuenta.</li>
+          <li>Quédate en la prueba al menos <strong>14 días seguidos</strong> sin salirte.</li>
+        </ol>
+        <p>Jugar un ratito de vez en cuando y contarme si algo falla ayuda muchísimo.</p>
+        <p class="note">Tubiluz es gratis y muestra anuncios: así se financia el proyecto. Durante la prueba puedes darme tu opinión con total confianza.</p>
+      </div>
+
+      <div class="l l-en">
+        <p>I’m looking for trusted people for the <strong>closed test</strong> of Tubiluz on Android. It’s free and helps a lot to find bugs before launch.</p>
+        <ul class="reqs" aria-label="Requirements">
+          <li>Free</li><li>Android only</li><li>Gmail / Google account</li><li>Android phone</li>
+        </ul>
+        <p><strong>How to join</strong></p>
+        <ol class="steps">
+          <li>Send your Gmail address to Harenson (or email <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>You’ll get an invite link — open it and accept.</li>
+          <li>Install Tubiluz from the Play Store with that same account.</li>
+          <li>Stay in the test for at least <strong>14 consecutive days</strong> without leaving.</li>
+        </ol>
+        <p>Playing a little now and then and reporting bugs helps a lot.</p>
+        <p class="note">Tubiluz is free and shows ads — that’s how the project is funded. During the test you can share feedback freely.</p>
+      </div>
+
+      <div class="l l-pt">
+        <p>Procuro pessoas de confiança para o <strong>teste fechado</strong> do Tubiluz no Android. É grátis e me ajuda muito a achar falhas antes do lançamento.</p>
+        <ul class="reqs" aria-label="Requisitos">
+          <li>Grátis</li><li>Só Android</li><li>Conta Gmail / Google</li><li>Celular Android</li>
+        </ul>
+        <p><strong>Como participar</strong></p>
+        <ol class="steps">
+          <li>Envie seu e-mail do Gmail para Harenson (ou escreva para <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>Você receberá um link de convite: abra e aceite.</li>
+          <li>Instale o Tubiluz pela Play Store com essa mesma conta.</li>
+          <li>Fique no teste por pelo menos <strong>14 dias seguidos</strong> sem sair.</li>
+        </ol>
+        <p>Jogar um pouco de vez em quando e avisar se algo falhar ajuda muito.</p>
+        <p class="note">Tubiluz é grátis e mostra anúncios: é assim que o projeto se financia. Durante o teste você pode dar feedback com confiança.</p>
+      </div>
+
+      <div class="l l-de">
+        <p>Ich suche vertrauenswürdige Leute für den <strong>geschlossenen Test</strong> von Tubiluz auf Android. Er ist kostenlos und hilft sehr, Fehler vor dem Start zu finden.</p>
+        <ul class="reqs" aria-label="Voraussetzungen">
+          <li>Kostenlos</li><li>Nur Android</li><li>Gmail-/Google-Konto</li><li>Android-Handy</li>
+        </ul>
+        <p><strong>So machst du mit</strong></p>
+        <ol class="steps">
+          <li>Schick deine Gmail-Adresse an Harenson (oder schreib an <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+          <li>Du bekommst einen Einladungslink — öffne ihn und nimm an.</li>
+          <li>Installiere Tubiluz über den Play Store mit demselben Konto.</li>
+          <li>Bleib mindestens <strong>14 Tage am Stück</strong> im Test, ohne ihn zu verlassen.</li>
+        </ol>
+        <p>Ab und zu ein bisschen spielen und Bugs melden hilft enorm.</p>
+        <p class="note">Tubiluz ist kostenlos und zeigt Werbung — so wird das Projekt finanziert. Im Test kannst du Feedback geben.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -294,10 +350,94 @@ footer a:hover{color:var(--accent)}
 <footer>
   <p><strong>HarryLabs Games</strong></p>
   <p>
-    <a href="https://harrylabs-games.github.io/tubiluz/privacy/">Política de privacidad</a>
+    <a href="https://harrylabs-games.github.io/tubiluz/privacy/">
+      <span class="l l-es">Política de privacidad</span>
+      <span class="l l-en">Privacy policy</span>
+      <span class="l l-pt">Política de privacidade</span>
+      <span class="l l-de">Datenschutzerklärung</span>
+    </a>
     ·
     <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>
   </p>
 </footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="close" aria-label="Close">×</button>
+  <img src="" alt="">
+</div>
+
+<script>
+(function(){
+  var ok=['es','en','pt','de'];
+  var shots=[
+    {id:'01_hint', es:'Pistas', en:'Hints', pt:'Dicas', de:'Tipps'},
+    {id:'02_menu', es:'Menú', en:'Menu', pt:'Menu', de:'Menü'},
+    {id:'03_level150', es:'Niveles', en:'Levels', pt:'Níveis', de:'Level'},
+    {id:'04_colorblind', es:'Daltónico', en:'Colorblind', pt:'Daltônico', de:'Farbenblind'},
+    {id:'05_tutorial', es:'Tutorial', en:'Tutorial', pt:'Tutorial', de:'Tutorial'},
+    {id:'06_random_hard', es:'Aleatorio', en:'Random', pt:'Aleatório', de:'Zufall'},
+    {id:'07_levels', es:'Selector', en:'Selector', pt:'Seletor', de:'Auswahl'},
+    {id:'08_settings', es:'Ajustes', en:'Settings', pt:'Ajustes', de:'Einstellungen'}
+  ];
+  var htmlLang={es:'es-419',en:'en',pt:'pt-BR',de:'de'};
+  var box=document.getElementById('shots');
+  var lb=document.getElementById('lightbox');
+  var lbImg=lb.querySelector('img');
+
+  function renderShots(lang){
+    var html='';
+    for(var i=0;i<shots.length;i++){
+      var s=shots[i];
+      var base='img/shots/'+lang+'/'+s.id;
+      var cap=s[lang]||s.es;
+      html+='<figure role="listitem"><button type="button" data-full="'+base+'.jpg" aria-label="'+cap+'">'
+        +'<picture><source srcset="'+base+'.webp" type="image/webp">'
+        +'<img src="'+base+'.jpg" width="540" height="960" loading="'+(i<2?'eager':'lazy')+'" alt="'+cap+'"></picture>'
+        +'</button><figcaption>'+cap+'</figcaption></figure>';
+    }
+    box.innerHTML=html;
+  }
+
+  function setLang(l){
+    if(ok.indexOf(l)<0)l='es';
+    document.documentElement.setAttribute('data-lang',l);
+    document.documentElement.setAttribute('lang',htmlLang[l]||'es-419');
+    document.querySelectorAll('.langbar button').forEach(function(b){
+      var on=b.dataset.l===l; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on?'true':'false');
+    });
+    renderShots(l);
+    try{localStorage.setItem('tubiluz-lang',l)}catch(e){}
+  }
+
+  var saved=null;
+  try{saved=localStorage.getItem('tubiluz-lang')}catch(e){}
+  var param=(new URLSearchParams(location.search)).get('lang');
+  var nav=(navigator.language||'es').toLowerCase();
+  var pick='es';
+  if(param&&ok.indexOf(param.slice(0,2))>=0)pick=param.slice(0,2);
+  else if(saved&&ok.indexOf(saved)>=0)pick=saved;
+  else if(nav.indexOf('en')===0)pick='en';
+  else if(nav.indexOf('pt')===0)pick='pt';
+  else if(nav.indexOf('de')===0)pick='de';
+  else pick='es';
+  setLang(pick);
+
+  document.querySelectorAll('.langbar button').forEach(function(b){
+    b.addEventListener('click',function(){setLang(b.dataset.l)});
+  });
+
+  box.addEventListener('click',function(e){
+    var btn=e.target.closest('button[data-full]');
+    if(!btn)return;
+    lbImg.src=btn.getAttribute('data-full');
+    lbImg.alt=btn.getAttribute('aria-label')||'';
+    lb.hidden=false; lb.classList.add('open');
+  });
+  function closeLb(){lb.classList.remove('open');lb.hidden=true;lbImg.removeAttribute('src')}
+  lb.querySelector('.close').addEventListener('click',closeLb);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
+})();
+</script>
 </body>
 </html>
