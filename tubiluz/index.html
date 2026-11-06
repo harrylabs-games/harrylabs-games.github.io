@@ -1,26 +1,303 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-419">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tubiluz – HarryLabs Games</title>
-<meta name="description" content="Tubiluz, a calm color sorting puzzle for Android by HarryLabs Games.">
-<link rel="icon" href="../assets/icon-192.png">
-<link rel="stylesheet" href="../assets/style.css">
-<meta property="og:image" content="https://harrylabs-games.github.io/assets/feature-graphic.png">
+<title>Tubiluz: Ordena los Colores — prueba cerrada</title>
+<meta name="description" content="Tubiluz es un puzzle tranquilo de ordenar colores. Ayúdame a probarlo en Android: gratis, con 200 niveles, modo aleatorio y pistas guiadas.">
+<meta name="theme-color" content="#0b0d1c">
+<link rel="icon" href="img/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+
+<!-- Open Graph / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_LA">
+<meta property="og:url" content="https://harrylabs-games.github.io/tubiluz/">
+<meta property="og:title" content="Tubiluz: Ordena los Colores — ayuda a probarlo">
+<meta property="og:description" content="Puzzle tranquilo de ordenar colores para Android. 200 niveles, modo aleatorio y pistas. Únete a la prueba cerrada.">
+<meta property="og:image" content="https://harrylabs-games.github.io/tubiluz/img/feature-graphic.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:site_name" content="HarryLabs Games">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tubiluz: Ordena los Colores — ayuda a probarlo">
+<meta name="twitter:description" content="Puzzle tranquilo de ordenar colores para Android. 200 niveles, modo aleatorio y pistas. Únete a la prueba cerrada.">
+<meta name="twitter:image" content="https://harrylabs-games.github.io/tubiluz/img/feature-graphic.jpg">
+
+<style>
+:root{
+  --bg:#0b0d1c;
+  --bg2:#151a3a;
+  --panel:#1b2048;
+  --accent:#ffb627;
+  --cyan:#5ce1e6;
+  --text:#eef0ff;
+  --muted:#a8aed6;
+  --ok:#7dffa0;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 40%) fixed;
+  line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+a{color:var(--accent)}
+a:hover{color:#ffcb5c}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 48px}
+.top{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;background:rgba(0,0,0,.28);border-bottom:1px solid rgba(255,255,255,.06);
+}
+.brand{display:flex;gap:10px;align-items:center;color:var(--text);text-decoration:none;font-weight:700;font-size:.95rem}
+.brand img{border-radius:8px;width:32px;height:32px}
+.top nav a{color:var(--muted);text-decoration:none;font-size:.9rem}
+.top nav a:hover{color:var(--cyan)}
+
+.hero{
+  text-align:center;padding:28px 0 8px;
+}
+.hero-icon{
+  width:112px;height:112px;border-radius:26px;margin:0 auto 14px;
+  box-shadow:0 12px 32px rgba(0,0,0,.45),0 0 0 2px rgba(92,225,230,.25);
+}
+.hero h1{
+  margin:0 0 8px;color:var(--accent);font-size:clamp(1.45rem,5.5vw,2rem);line-height:1.2;
+}
+.pitch{
+  margin:0 auto 18px;max-width:34em;color:var(--text);font-size:1.08rem;font-weight:500;
+}
+.feature{
+  border-radius:16px;overflow:hidden;margin:0 auto 8px;
+  box-shadow:0 10px 28px rgba(0,0,0,.4);
+  border:1px solid rgba(92,225,230,.18);
+}
+.feature img{width:100%}
+
+section{margin-top:2.1rem}
+h2{
+  margin:0 0 .7rem;font-size:1.25rem;color:#fff;
+  border-left:3px solid var(--cyan);padding-left:10px;
+}
+h2 .emoji{margin-right:.25rem}
+.lead{color:var(--muted);margin:0 0 1rem}
+.panel{
+  background:var(--panel);border-radius:16px;padding:16px 16px 14px;
+  border:1px solid rgba(255,255,255,.06);
+}
+.feats{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.feats li{
+  display:flex;gap:10px;align-items:flex-start;
+  background:rgba(0,0,0,.18);border-radius:12px;padding:10px 12px;
+}
+.feats .mark{
+  flex:0 0 auto;width:1.5rem;height:1.5rem;border-radius:50%;
+  background:rgba(92,225,230,.15);color:var(--cyan);
+  display:grid;place-items:center;font-size:.85rem;margin-top:.1rem;
+}
+.feats strong{color:#fff;font-weight:650}
+
+.shots-wrap{margin-top:.4rem}
+.shots{
+  display:flex;gap:12px;overflow-x:auto;padding:6px 2px 14px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+}
+.shots figure{
+  margin:0;flex:0 0 auto;width:min(42vw,180px);scroll-snap-align:start;
+}
+.shots img{
+  width:100%;border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.08);
+}
+.shots figcaption{
+  text-align:center;font-size:.75rem;color:var(--muted);margin-top:6px;
+}
+.hint-scroll{font-size:.8rem;color:var(--muted);margin:0 0 6px}
+
+.cta-box{
+  background:linear-gradient(160deg,rgba(255,182,39,.12),rgba(92,225,230,.08));
+  border:1px solid rgba(255,182,39,.35);
+  border-radius:18px;padding:18px 16px 16px;
+}
+.cta-box h2{border-left-color:var(--accent)}
+.cta-box p{margin:.55rem 0}
+.reqs{
+  display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;padding:0;list-style:none;
+}
+.reqs li{
+  background:rgba(0,0,0,.25);border:1px solid rgba(92,225,230,.25);
+  color:var(--cyan);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600;
+}
+.steps{margin:0;padding-left:1.2rem}
+.steps li{margin:.45rem 0}
+.note{
+  margin-top:14px;padding:12px 14px;border-radius:12px;
+  background:rgba(0,0,0,.25);border-left:3px solid var(--accent);
+  color:var(--muted);font-size:.95rem;
+}
+.mail{
+  display:inline-block;margin-top:4px;font-weight:700;color:var(--accent);
+  word-break:break-all;
+}
+
+footer{
+  text-align:center;color:var(--muted);font-size:.85rem;
+  padding:22px 16px 28px;border-top:1px solid rgba(255,255,255,.08);margin-top:2.5rem;
+}
+footer p{margin:.35rem 0}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--accent)}
+
+@media (min-width:640px){
+  .feats{grid-template-columns:1fr 1fr}
+  .shots figure{width:160px}
+  .cta-box,.panel{padding:20px}
+}
+</style>
 </head>
 <body>
-<header class="top"><a class="brand" href="../index.html"><img src="../assets/icon-192.png" alt="" width="36" height="36"> HarryLabs Games</a>
-<nav><a href="../tubiluz/index.html">Tubiluz</a></nav></header>
-<main>
-<div class="lswitch"><button data-l="en">English</button><button data-l="es">Español</button><button data-l="pt">Português</button><button data-l="de">Deutsch</button></div><div class="hero"><img src="../assets/icon-192.png" alt="Tubiluz icon" width="120" height="120"><h1>Tubiluz</h1></div><section class="l l-en" lang="en"><p class="tag">A calm color sorting puzzle</p><p>Tap a tube, then another, to move the top balls. A ball can only go onto the same color or into an empty tube. Sort every tube to a single color.</p><ul class="feats"><li>200 levels, from 3 to 12 colors, with taller tubes and one-empty-tube challenge levels</li><li>Endless random mode in Easy, Medium and Hard</li><li>Hints that show one move of a shortest solution from where you are</li><li>Interactive tutorial</li><li>Colorblind mode with an adapted palette and symbols</li><li>Relaxing music and sounds made for the game</li><li>Español, English, Português, Deutsch</li><li>No account needed – progress stays on your device</li><li>Free, with ads</li></ul><p><a class="cta" href="https://play.google.com/store/apps/details?id=com.harrylabs.tubiluz">Get it on Google Play</a></p><p class="small"><a href="privacy/index.html">Privacy Policy</a> · <a href="terms/index.html">Terms of Use</a> · Contact: <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a></p></section><section class="l l-es" lang="es-419"><p class="tag">Un puzzle tranquilo de ordenar colores</p><p>Toca un tubo y luego otro para mover las bolas de arriba. Una bola solo va sobre su mismo color o en un tubo vacío. Deja cada tubo de un solo color.</p><ul class="feats"><li>200 niveles, de 3 a 12 colores, con tubos más altos y niveles de reto con un solo tubo vacío</li><li>Modo aleatorio sin fin: Fácil, Medio y Difícil</li><li>Pistas que muestran un movimiento de una solución más corta desde donde estás</li><li>Tutorial interactivo</li><li>Modo daltónico con paleta adaptada y símbolos</li><li>Música y sonidos relajantes hechos para el juego</li><li>Español, English, Português, Deutsch</li><li>Sin cuentas: el progreso queda en tu dispositivo</li><li>Gratis, con anuncios</li></ul><p><a class="cta" href="https://play.google.com/store/apps/details?id=com.harrylabs.tubiluz">Disponible en Google Play</a></p><p class="small"><a href="privacy/es.html">Política de privacidad</a> · <a href="terms/es.html">Términos de uso</a> · Contacto: <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a></p></section><section class="l l-pt" lang="pt-BR"><p class="tag">Um quebra-cabeça tranquilo de organizar cores</p><p>Toque em um tubo e depois em outro para mover as bolas de cima. Uma bola só vai sobre a mesma cor ou em um tubo vazio. Deixe cada tubo com uma só cor.</p><ul class="feats"><li>200 níveis, de 3 a 12 cores, com tubos mais altos e níveis de desafio com um só tubo vazio</li><li>Modo aleatório sem fim: Fácil, Médio e Difícil</li><li>Dicas que mostram um movimento de uma solução mais curta a partir de onde você está</li><li>Tutorial interativo</li><li>Modo daltônico com paleta adaptada e símbolos</li><li>Música e sons relaxantes feitos para o jogo</li><li>Español, English, Português, Deutsch</li><li>Sem conta: o progresso fica no seu dispositivo</li><li>Grátis, com anúncios</li></ul><p><a class="cta" href="https://play.google.com/store/apps/details?id=com.harrylabs.tubiluz">Disponível no Google Play</a></p><p class="small"><a href="privacy/pt-br.html">Política de Privacidade</a> · <a href="terms/pt-br.html">Termos de Uso</a> · Contato: <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a></p></section><section class="l l-de" lang="de"><p class="tag">Ein entspanntes Farbsortier-Puzzle</p><p>Tippe auf ein Röhrchen und dann auf ein anderes, um die oberen Kugeln zu bewegen. Eine Kugel passt nur auf die gleiche Farbe oder in ein leeres Röhrchen. Sortiere jedes Röhrchen auf eine Farbe.</p><ul class="feats"><li>200 Level mit 3 bis 12 Farben, höheren Röhrchen und Herausforderungs-Leveln mit nur einem leeren Röhrchen</li><li>Endloser Zufallsmodus: Leicht, Mittel und Schwer</li><li>Tipps zeigen einen Zug einer kürzesten Lösung ab deiner Stellung</li><li>Interaktives Tutorial</li><li>Farbenblind-Modus mit angepasster Palette und Symbolen</li><li>Entspannende Musik und Sounds, eigens für das Spiel</li><li>Español, English, Português, Deutsch</li><li>Kein Konto nötig – der Fortschritt bleibt auf deinem Gerät</li><li>Kostenlos, mit Werbung</li></ul><p><a class="cta" href="https://play.google.com/store/apps/details?id=com.harrylabs.tubiluz">Bei Google Play</a></p><p class="small"><a href="privacy/de.html">Datenschutzerklärung</a> · <a href="terms/de.html">Nutzungsbedingungen</a> · Kontakt: <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a></p></section><div class="shots"><img src="../assets/shots/01_hint.png" alt="Tubiluz screenshot" width="270" height="480" loading="lazy"><img src="../assets/shots/02_menu.png" alt="Tubiluz screenshot" width="270" height="480" loading="lazy"><img src="../assets/shots/04_colorblind.png" alt="Tubiluz screenshot" width="270" height="480" loading="lazy"><img src="../assets/shots/06_random_hard.png" alt="Tubiluz screenshot" width="270" height="480" loading="lazy"></div><p class="small">Android · com.harrylabs.tubiluz · v0.3.2</p><script>
-(function(){var ok=['en','es','pt','de'];function set(l){document.documentElement.setAttribute('data-lang',l);
-document.querySelectorAll('.lswitch button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});}
-var p=(new URLSearchParams(location.search)).get('lang');var n=(p||navigator.language||'en').slice(0,2).toLowerCase();
-set(ok.indexOf(n)>=0?n:'en');document.querySelectorAll('.lswitch button').forEach(function(b){b.onclick=function(){set(b.dataset.l)}});})();
-</script>
+<header class="top">
+  <a class="brand" href="../">
+    <img src="img/icon-192.png" width="32" height="32" alt="">
+    HarryLabs Games
+  </a>
+  <nav><a href="privacy/">Privacidad</a></nav>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-label="Presentación">
+    <picture>
+      <source srcset="img/icon-192.webp" type="image/webp">
+      <img class="hero-icon" src="img/icon-192.png" width="192" height="192" alt="Icono de Tubiluz">
+    </picture>
+    <h1>Tubiluz: Ordena los Colores</h1>
+    <p class="pitch">Ordena bolas de colores en tubos: 200 niveles, modo aleatorio y pistas guiadas.</p>
+    <picture class="feature">
+      <source srcset="img/feature-graphic.webp" type="image/webp">
+      <img src="img/feature-graphic.jpg" width="1024" height="500" alt="Tubiluz — gráfica del juego">
+    </picture>
+  </section>
+
+  <section aria-labelledby="que-es">
+    <h2 id="que-es">Qué es Tubiluz</h2>
+    <p class="lead">Es un puzzle tranquilo: toca un tubo para levantar la bola de arriba y luego otro para dejarla. Una bola solo puede ir sobre una del mismo color o en un tubo vacío. Ganas cuando cada tubo está vacío o lleno de un solo color.</p>
+    <div class="panel">
+      <ul class="feats">
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>200 niveles</strong> — de 3 a 12 colores, con tubos más altos y retos de un solo tubo vacío.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo aleatorio</strong> — tableros sin fin en Fácil, Medio y Difícil, todos con solución.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Pistas guiadas</strong> — iluminan origen y destino con un movimiento de la solución más corta.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Tutorial</strong> — tres movimientos guiados la primera vez; puedes repetirlo cuando quieras.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Modo daltónico</strong> — paleta más fácil de distinguir y un símbolo por color.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Música y sonidos</strong> — relajantes, hechos para el juego; ajustables en Ajustes.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Idiomas</strong> — Español, English, Português y Deutsch.</span></li>
+        <li><span class="mark" aria-hidden="true">●</span><span><strong>Sin cuentas</strong> — el progreso y los ajustes se guardan en tu dispositivo.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="capturas">
+    <h2 id="capturas">Así se ve</h2>
+    <p class="hint-scroll">Desliza para ver las capturas →</p>
+    <div class="shots-wrap">
+      <div class="shots" role="list">
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/01_hint.webp" type="image/webp">
+            <img src="img/shots/01_hint.jpg" width="540" height="960" loading="lazy" alt="Pista guiada en un nivel">
+          </picture>
+          <figcaption>Pistas</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/02_menu.webp" type="image/webp">
+            <img src="img/shots/02_menu.jpg" width="540" height="960" loading="lazy" alt="Menú principal">
+          </picture>
+          <figcaption>Menú</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/03_level150.webp" type="image/webp">
+            <img src="img/shots/03_level150.jpg" width="540" height="960" loading="lazy" alt="Nivel avanzado">
+          </picture>
+          <figcaption>Niveles</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/04_colorblind.webp" type="image/webp">
+            <img src="img/shots/04_colorblind.jpg" width="540" height="960" loading="lazy" alt="Modo daltónico con símbolos">
+          </picture>
+          <figcaption>Daltónico</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/05_tutorial.webp" type="image/webp">
+            <img src="img/shots/05_tutorial.jpg" width="540" height="960" loading="lazy" alt="Tutorial interactivo">
+          </picture>
+          <figcaption>Tutorial</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/06_random_hard.webp" type="image/webp">
+            <img src="img/shots/06_random_hard.jpg" width="540" height="960" loading="lazy" alt="Modo aleatorio difícil">
+          </picture>
+          <figcaption>Aleatorio</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/07_levels.webp" type="image/webp">
+            <img src="img/shots/07_levels.jpg" width="540" height="960" loading="lazy" alt="Selector de niveles">
+          </picture>
+          <figcaption>Selector</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <source srcset="img/shots/08_settings.webp" type="image/webp">
+            <img src="img/shots/08_settings.jpg" width="540" height="960" loading="lazy" alt="Pantalla de ajustes">
+          </picture>
+          <figcaption>Ajustes</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="probar-title" id="probar">
+    <div class="cta-box">
+      <h2 id="probar-title">Ayúdame a probarlo</h2>
+      <p>Estoy buscando personas de confianza para la <strong>prueba cerrada</strong> de Tubiluz en Android. Es gratis y me ayuda mucho a encontrar fallos antes del lanzamiento.</p>
+      <ul class="reqs" aria-label="Requisitos">
+        <li>Gratis</li>
+        <li>Solo Android</li>
+        <li>Cuenta de Gmail / Google</li>
+        <li>Teléfono Android</li>
+      </ul>
+      <p><strong>Cómo unirte</strong></p>
+      <ol class="steps">
+        <li>Envíale tu correo de Gmail a Harenson (también puedes escribir a <a class="mail" href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>).</li>
+        <li>Recibirás un enlace de invitación: ábrelo y acéptalo.</li>
+        <li>Instala Tubiluz desde Play Store con esa misma cuenta.</li>
+        <li>Quédate en la prueba al menos <strong>14 días seguidos</strong> sin salirte.</li>
+      </ol>
+      <p>Jugar un ratito de vez en cuando y contarme si algo falla ayuda muchísimo.</p>
+      <p class="note">Tubiluz es gratis y muestra anuncios: así se financia el proyecto. Durante la prueba puedes darme tu opinión con total confianza.</p>
+    </div>
+  </section>
 </main>
-<footer><p>© 2026 HarryLabs Games (Harenson Henao) · Colombia · <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a></p>
-<p><a href="../tubiluz/privacy/index.html">Privacy</a> · <a href="../tubiluz/terms/index.html">Terms</a></p></footer>
+
+<footer>
+  <p><strong>HarryLabs Games</strong></p>
+  <p>
+    <a href="https://harrylabs-games.github.io/tubiluz/privacy/">Política de privacidad</a>
+    ·
+    <a href="mailto:harrylabs.games@gmail.com">harrylabs.games@gmail.com</a>
+  </p>
+</footer>
 </body>
 </html>
